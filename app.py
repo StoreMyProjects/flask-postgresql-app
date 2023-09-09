@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, session, make_response
+from flask import Flask, render_template, request, url_for, redirect, session, make_response, g
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 import pdfkit
@@ -68,6 +68,13 @@ def register():
                 return render_template("register.html", error = error)
     return render_template("register.html")
 
+def login_required(func):
+    def secure_function():
+        if "username" not in session:
+            return redirect(url_for("login"))
+        return func()
+    secure_function.__name__= func.__name__
+    return secure_function
 
 @app.route('/login', methods=["GET", 'POST'])
 def login():
@@ -100,6 +107,7 @@ def login():
 
 
 @app.route('/destinations', methods=['GET', 'POST'])
+@login_required
 def destinations():
     if request.method == "POST":
         if request.form.get("selected_package") == "Spain":
@@ -239,6 +247,7 @@ def destinations():
 
 
 @app.route('/hotels', methods=['GET','POST'])
+@login_required
 def hotels():
     if request.method == "POST":
         cost = request.form.get('cost')
@@ -283,6 +292,7 @@ def hotels():
 
 
 @app.route('/flights', methods=['GET','POST'])
+@login_required
 def flights():
     if request.method == "POST":
         flight_cost = request.form.get('cost')
@@ -339,6 +349,7 @@ def flights():
     return render_template("flights.html")
 
 @app.route('/payment', methods = ['GET', 'POST'])
+@login_required
 def payment():
     if request.method == "GET":
         conn = get_db()
@@ -395,6 +406,7 @@ def payment():
 
 
 @app.route('/bookings', methods=['GET', 'POST'])
+@login_required
 def bookingdetails():
     if request.method == "GET":
         try:
@@ -413,6 +425,7 @@ def bookingdetails():
 
 
 @app.route('/bill')
+@login_required
 def bill():
     if request.method == 'GET':
         conn = get_db()
@@ -453,6 +466,7 @@ def bill():
 
 
 @app.route('/pdf')
+@login_required
 def pdf():
     conn = get_db()
     db = conn.cursor()
@@ -495,6 +509,7 @@ def pdf():
 
 
 @app.route('/profile')
+@login_required
 def profile():
     return render_template("profile.html")    
 
@@ -506,6 +521,7 @@ def logout():
 
 
 @app.route('/about')
+@login_required
 def about():
     return render_template("about.html")
 
