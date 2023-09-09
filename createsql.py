@@ -132,16 +132,16 @@ def deletetables():
         conn.autocommit = True  # Disable transactions for database creation
         cur = conn.cursor()
 
-        # Create a new database
-        cur.execute("DROP TABLE users")
-
-        cur.execute("DROP TABLE hotels")
-
-        cur.execute("DROP TABLE flights")
+        # delete all tables    
+        cur.execute("DROP TABLE bookings")
 
         cur.execute("DROP TABLE destinations")
 
-        cur.execute("DROP TABLE bookings")
+        cur.execute("DROP TABLE flights")
+
+        cur.execute("DROP TABLE hotels")
+
+        cur.execute("DROP TABLE users")
 
         cur.close()
         conn.close()
