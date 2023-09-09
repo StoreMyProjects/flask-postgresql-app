@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, url_for, redirect, session, make_response
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
-import psycopg2, pdfkit
+import pdfkit
 import re, datetime
-from createsql import createsql
+from createsql import createsql, get_db
 
 app = Flask(__name__)
 
@@ -12,18 +12,6 @@ app.config.from_pyfile("config.py")
 
 Session(app)
 
-
-def get_db():
-    # Create a connection to the database
-    conn = psycopg2.connect(
-        dbname='flaskdb',
-        user='postgres',
-        password='123456789',
-        host='flaskdb.ce2bgribc0sr.ap-south-1.rds.amazonaws.com',
-        port='5432'
-    )
-
-    return conn
 
 dt = datetime.datetime.now()
 date_now = dt.strftime("%x")
