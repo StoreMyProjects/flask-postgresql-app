@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, redirect, session, make_response, g, jsonify
+from flask import Flask, render_template, request, url_for, redirect, session, make_response
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 import psycopg2, pdfkit
@@ -12,8 +12,6 @@ app.config.from_pyfile("config.py")
 
 Session(app)
 
-# conn = psycopg2.connect(dbname='flaskdb', user='postgres', password='123456789', host='flaskdb.ce2bgribc0sr.ap-south-1.rds.amazonaws.com', port=5432)
-# db=conn.cursor()
 
 def get_db():
     # Create a connection to the database

@@ -1,48 +1,29 @@
-from flask import Flask, Blueprint, render_template, request, url_for, redirect, session, make_response, g, jsonify
-from flask_session import Session
-from werkzeug.security import generate_password_hash, check_password_hash
-import psycopg2, pdfkit
-import re, datetime
+from flask import Blueprint, jsonify
+import psycopg2
 
 createsql = Blueprint('createsql', __name__)
 
 @createsql.route('/connect')
 def get_db():
-    if 'db' not in g:
-        # Replace these values with your own RDS database information
-        dbname = 'flaskdb'
-        user = 'postgres'
-        password = '123456789'
-        host = 'flaskdb.ce2bgribc0sr.ap-south-1.rds.amazonaws.com'
-        port = '5432'  # Default PostgreSQL port
+    # Create a connection to the database
+    conn = psycopg2.connect(
+        dbname="flaskdb",
+        user='postgres',
+        password="123456789",
+        host='flaskdb.ce2bgribc0sr.ap-south-1.rds.amazonaws.com',
+        port='5432'
+    )
+    return conn
 
-
-        # Create a connection to the database
-        g.db = psycopg2.connect(
-            dbname=dbname,
-            user=user,
-            password=password,
-            host=host,
-            port=port
-        )
-
-    return g.db
-
-@createsql.teardown_app_request
-def close_db(error):
-    if 'db' in g:
-        g.db.close()
+# @createsql.teardown_app_request
+# def close_db(error):
+#     if 'db' in g:
+#         g.db.close()
 
 @createsql.route('/createdb')
 def create_database():
     try:
-        # Connect to the PostgreSQL server
-        conn = psycopg2.connect(
-            host='flaskdb.ce2bgribc0sr.ap-south-1.rds.amazonaws.com',
-            port=5432,
-            user='postgres',
-            password=123456789
-        )
+        conn = get_db()
         conn.autocommit = True  # Disable transactions for database creation
         cur = conn.cursor()
 
@@ -61,6 +42,7 @@ def create_database():
 def create_table():
     try:
         conn = get_db()
+        conn.autocommit = True 
         cur= conn.cursor()
         # Create required tables
         cur.execute('''
@@ -71,8 +53,6 @@ def create_table():
                 password text NOT NULL
             )
         ''')
-
-        conn.commit()
 
         cur.execute('''CREATE TABLE IF NOT EXISTS hotels (
                     id SERIAL NOT NULL PRIMARY KEY ,
@@ -85,7 +65,6 @@ def create_table():
                     check_out_date date NOT NULL,
                     username text REFERENCES users(username)
         )''')
-        conn.commit()
 
         cur.execute('''CREATE TABLE IF NOT EXISTS flights (
                     id SERIAL NOT NULL PRIMARY KEY ,
@@ -101,7 +80,6 @@ def create_table():
                     username text REFERENCES users(username)
 
         )''')
-        conn.commit()
 
         cur.execute('''CREATE TABLE IF NOT EXISTS destinations (
                     id SERIAL NOT NULL PRIMARY KEY ,
@@ -112,7 +90,6 @@ def create_table():
                     estimated_cost numeric NOT NULL,
                     username text REFERENCES users(username)      
         )''')
-        conn.commit()
 
         cur.execute('''CREATE TABLE IF NOT EXISTS bookings (
                     id SERIAL NOT NULL PRIMARY KEY ,
@@ -138,8 +115,8 @@ def create_table():
                     total_cost numeric NOT NULL,
                     username text REFERENCES users(username)      
         )''')
-        conn.commit()
 
+        cur.close()
         conn.close()
 
         return jsonify({'message': 'Table created successfully!'})
@@ -151,27 +128,21 @@ def create_table():
 @createsql.route("/deletetable")
 def deletetables():
     try:
-        # Connect to the PostgreSQL server
-        conn = psycopg2.connect(
-            host='flaskdb.ce2bgribc0sr.ap-south-1.rds.amazonaws.com',
-            port=5432,
-            user='postgres',
-            password=123456789
-        )
+        conn = get_db()
         conn.autocommit = True  # Disable transactions for database creation
         cur = conn.cursor()
 
         # Create a new database
         cur.execute("DROP TABLE users")
-        conn.commit()
+
         cur.execute("DROP TABLE hotels")
-        conn.commit()
+
         cur.execute("DROP TABLE flights")
-        conn.commit()
+
         cur.execute("DROP TABLE destinations")
-        conn.commit()
+
         cur.execute("DROP TABLE bookings")
-        conn.commit()
+
         cur.close()
         conn.close()
 
