@@ -1,0 +1,384 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/home">TourX</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('destinations') }}">Destinations</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('hotels') }}">Hotels</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('flights') }}">Flights</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('bookingdetails') }}">Bookings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('about') }}">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('profile') }}">
+            <i class="fa fa-user"></i>
+          </a>
+        </li>
+      </ul>
+    
+    </div>
+</nav>
+
+<div>
+  <h3 style="text-align: center; color: blueviolet; "> <b> Our Best Destinations</b></h3>
+</div>
+
+    {% if msg %}
+      <div><h4 style="text-align: center; color: white;">{{ msg }}</h4></div>
+    {% endif %}
+
+<section id="destinations" class="destinations">
+   <div class="row">
+   <div class="col-lg-3 col-md-6 col-xs-12 ">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://media.istockphoto.com/photos/tossa-de-mar-on-the-costa-brava-catalunya-spain-picture-id509288876?k=20&m=509288876&s=612x612&w=0&h=SU2i1syla7SaOT_eKilwiHYNw6_Aw5pOXj--nPuVINA=" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="Spain"> </center> </form>
+           <p style="text-align: center;"> Price Starting at:&#x20B9;220,000/person</p>
+           <p style='color: brown; text-align: center;'>9Nights/10days</p>
+           <p style="color:green; text-align: center;">In Demand</p> 
+         </div>
+       </a>
+     </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-xs-12">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://c1.wallpaperflare.com/preview/1011/1010/380/udaipur-city-palace-architecture-travel.jpg" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="India"></center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;153,000/person</p>
+           <p style='color: brown; text-align: center;'>9Nights/10days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-xs-12">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c3dpdHplcmxhbmR8ZW58MHx8MHx8&w=1000&q=80" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="Switzerland"></center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;117,500/person</p>
+           <p style='color: brown; text-align: center;'>9Nights/10days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-xs-12">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://tourtelegraph.com/wp-content/uploads/2021/03/belgium.tourtelegraph.jpeg" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="Belgium"></center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;213,000/person</p>
+           <p style='color: brown; text-align: center;'>7Nights/8days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+ </div>
+ <div class="row">
+   <div class="col-lg-3 col-md-6 col-xs-12 ">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://media.istockphoto.com/photos/colosseum-in-rome-and-morning-sun-italy-picture-id539115110?k=20&m=539115110&s=612x612&w=0&h=_vaURTolEYbJoQuVziXEmquo_QOW_P5A_I82owLx-D0=" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="Italy"></center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;118,000/person</p>
+           <p style='color: brown; text-align: center;'>7Nights/8days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-xs-12">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://lp-cms-production.imgix.net/2020-11/shutterstockRF_216281164.jpg?auto=format&fit=crop&sharp=10&vib=20&ixlib=react-8.6.4&w=850" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="Australia"> </center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;210,000/person</p>
+           <p style='color: brown; text-align: center;'>7Nights/8days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-xs-12 ">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://www.planetware.com/wpimages/2019/09/ireland-in-pictures-most-beautiful-places-to-visit-carrick-a-rede-rope-bridge.jpg" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="Ireland"></center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;119,000/person</p>
+           <p style='color: brown; text-align: center;'>7Nights/8days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-xs-12 ">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://images.prismic.io/prospects-ac-uk/a5b6d4f1620af483568f338d5fe7bde5a60f5082_work-in-new-zealand-2.jpg?auto=compress,format" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="New Zealand"></center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;217,000/person</p>
+           <p style='color: brown; text-align: center;'>7Nights/8days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+ </div>
+ <div class="row">
+   <div class="col-lg-3 col-md-6 col-xs-12">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Toronto_%2815085972212%29.jpg/1200px-Toronto_%2815085972212%29.jpg" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="Canada"></center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;187,100/person</p>
+           <p style='color: brown; text-align: center;'>4Nights/5days</p>
+           <p style="color:green; text-align: center;">In Demand</p>   
+         </div>
+       </a>
+     </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-xs-12">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://media.istockphoto.com/photos/angel-falls-from-the-river-bank-picture-id666855836?k=20&m=666855836&s=612x612&w=0&h=wPyRRa8bqVwMfDyULTWuDhiiAwRylHd44KVlibbm7tk=" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="Venezuela"></center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;115,000/person</p>
+           <p style='color: brown; text-align: center;'>4Nights/5days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-xs-12">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRysnkve9JbzTwOdB9zZblP08CiatK_0BxllQ&usqp=CAU" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="Arizona"></center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;215,400/person</p>
+           <p style='color: brown; text-align: center;'>4Nights/5days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-xs-12">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/city-of-alesund-norway-royalty-free-image-1620376302." alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="Norway"></center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;210,500/person</p>
+           <p style='color: brown; text-align: center;'>9Nights/10days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+ </div>
+ <div class="row">
+   <div class="col-lg-3 col-md-6 col-xs-12">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://images.unsplash.com/photo-1490077476659-095159692ab5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bXlhbm1hcnxlbnwwfHwwfHw%3D&w=1000&q=80" alt="" style="width:100%">
+         <div class="caption">
+       <form  action="/destinations" method="post">
+        <center> <input type="submit" name="selected_package" value="Myanmar"></center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;211,000/person</p>
+           <p style='color: brown; text-align: center;'>7Nights/8days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-xs-12">
+     <div class="thumbnail">
+       <a href="/">
+         <img src="https://www.wildfrontierstravel.com/media/cache/page_image_large/upload/mirror/www-wildfrontierstravel-com/ff58e579_50a5c9a2e00e0260dfe10978a4c28ec1.jpeg" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="Namibia"></center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;117,300/person</p>
+           <p style='color: brown; text-align: center;'>7Nights/8days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-xs-12">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfKP1FpbHBRz12mfpP1Dqy_FwltYL8PMCbtg&usqp=CAU" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="French Polynesia"></center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;215,750/person</p>
+           <p style='color: brown; text-align: center;'>4Nights/5days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-xs-12 ">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://www.planetware.com/wpimages/2020/01/iceland-in-pictures-beautiful-places-to-photograph-godafoss-waterfall.jpg" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="Iceland"></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;218,200/person</p>
+           <p style='color: brown; text-align: center;'>9Nights/10days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+ </div>
+ <div class="row">
+   <div class="col-lg-3 col-md-6 col-xs-12">
+     <div class="thumbnail">
+       <a href="/destinations">
+         <img src="https://thumbor.forbes.com/thumbor/960x0/https%3A%2F%2Fspecials-images.forbesimg.com%2Fimageserve%2F6104575948750620ea1910e1%2FView-of-the-Acropolos-in-Athens-from-Hytra-Restaurant%2F960x0.jpg%3Ffit%3Dscale" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="Greece"></center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;214,800/person</p>
+           <p style='color: brown; text-align: center;'>8Nights/9days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-xs-12">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtCZSBtXLBnop_2uJsvGRj3EACSTKVQKUCfA&usqp=CAU" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="China"></center></form>
+           <p style="text-align: center;"> Price Starting at:&#x20B9;115,900/person</p>
+           <p style='color: brown; text-align: center;'>5Nights/6days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-xs-12 ">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcOKy2gQatp8kSzaGrPkQojnxLBBIQ82CyWw&usqp=CAU" alt="" style="width:100%">
+         <div class="caption">
+         <form  action="/destinations" method="post">
+          <center> <input type="submit" name="selected_package" value="Germany"></center></form>
+           <p style="text-align: center;">Price Starting at:&#x20B9;116,800/person</p>
+           <p style='color: brown; text-align: center;'>4Nights/5days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+   <div class="col-lg-3 col-md-6 col-xs-12">
+     <div class="thumbnail">
+       <a href="">
+         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhaAw2-8Y-Vwev_F8QklLz1tZsbmp4EVud7A&usqp=CAU" alt="" style="width:100%">
+         <div class="caption">
+           <form  action="/destinations" method="post">
+           <center> <input type="submit" name="selected_package" value="Chile"></form> </center>
+           <p style="text-align: center;">Price Starting at:&#x20B9;119,000/person</p>
+           <p style='color: brown; text-align: center;'>7Nights/8days</p>
+           <p style="color:green; text-align: center;">In Demand</p>
+         </div>
+       </a>
+     </div>
+   </div>
+
+ </div>
+ </section>
+
+ <footer class="bg-dark text-center text-white">
+
+  <div class="container p-4 pb-0">
+
+    <section class="mb-4">
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998;" href="#!" role="button">
+        <i class="fa fa-facebook-f"></i>
+      </a>
+
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee;" href="#!" role="button">
+        <i class="fa fa-twitter"></i>
+      </a>
+
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #db4437;" href="#!" role="button">
+        <i class="fa fa-google"></i>
+      </a>
+
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #bc2a8d;" href="#!" role="button">
+        <i class="fa fa-instagram"></i>
+      </a>
+
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca;" href="#!" role="button">
+        <i class="fa fa-linkedin"></i>
+      </a>
+
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #333333;" href="#!" role="button">
+        <i class="fa fa-github"></i>
+      </a>
+    </section>
+
+  </div>
+
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2022 Copyright:
+    <a class="text-white" href="https://tourxbootstrap.com/">TourX.com</a>
+  </div>
+
+</footer>
+
+{% endblock %}

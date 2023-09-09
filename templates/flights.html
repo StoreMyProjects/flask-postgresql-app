@@ -1,0 +1,163 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/home">TourX</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <form class="d-flex">
+        <input class="form-control me-3" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('destinations') }}">Destinations</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('hotels') }}">Hotels</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('flights') }}">Flights</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('bookingdetails') }}">Bookings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('about') }}">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('profile') }}">
+            <i class="fa fa-user"></i>
+          </a>
+        </li>
+      </ul>
+    
+    </div>
+</nav>
+
+  <!-- <h2 style="text-align: center;">Flights</h2> -->
+
+<div style="background-image: url(https://www.schengenvisaitinerary.com/blog/wp-content/uploads/2019/03/Flight-Ticket-Offers.jpg); height:100vh;">
+  <div class="container-sm h-100">
+  <div class="row justify-content-center">
+      <div class="col-sm-9 p-5">
+          <form class="row g-3" action="/flights" method="post">
+
+            {% if msg %}
+            <div><h4 style="text-align: center; color: white;">{{ msg }}</h4></div>
+            {% endif %}
+
+            <div class="col-md-12">
+              <label for="cost" class="form-label">Choose Your Starting Budget Range:</label>
+              <select name="cost" class="form-select" id="cost" name="cost">
+              <option value="90000">90000</option>
+              <option value="95000">95000</option>
+              <option value="100000">100000</option>
+              <option value="105000">105000</option>
+              <option value="Above 110000 ">Above 110000 </option>
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <label for="trip" class="form-label" >Trip Type</label>
+              <select class="form-select" id="trip" name="trip_type">
+                <option selected>Round Trip</option>
+                  <option>One Way</option>
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <label for="classtype" class="form-label">Class</label>
+              <select class="form-select" id="classtype" name="class_type" required>
+                <option selected>Economy</option>
+                <option>Premium Economy</option>
+                <option>Business</option>
+                <option>First</option>
+              </select>
+            </div>
+
+            <div class="col-md-3">
+              <label for="departure" class="form-label">Departure</label>
+              <input type="date" class="form-control" id="departure" name="departure" required>
+            </div>
+
+            <div class="col-md-3">
+              <label for="return" class="form-label">Return</label>
+              <input type="date" class="form-control" id="return" name="return">
+            </div>
+
+            <div class="col-md-4">
+              <label for="passengers" class="form-label">No. of passengers</label>
+              <input type="number" class="form-control" id="passengers" name="passengers" required>
+            </div>
+              
+            <div class="col-md-4">
+              <label for="source" class="form-label">Source</label>
+              <input type="text" class="form-control" id="source" name="source" required>
+            </div>
+
+            <div class="col-md-4">
+                <label for="destination" class="form-label">Destination</label>
+                <input type="text" class="form-control" id="destination" name="destination" required>
+            </div>
+
+            <div class="d-grid gap-2 col-6 mx-auto">
+              <button type="submit" class="btn btn-primary">Book Flight</button>
+            </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="bg-dark text-center text-white">
+
+  <div class="container p-4 pb-0">
+
+    <section class="mb-4">
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998;" href="#!" role="button">
+        <i class="fa fa-facebook-f"></i>
+      </a>
+
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee;" href="#!" role="button">
+        <i class="fa fa-twitter"></i>
+      </a>
+
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #db4437;" href="#!" role="button">
+        <i class="fa fa-google"></i>
+      </a>
+
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #bc2a8d;" href="#!" role="button">
+        <i class="fa fa-instagram"></i>
+      </a>
+
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca;" href="#!" role="button">
+        <i class="fa fa-linkedin"></i>
+      </a>
+
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #333333;" href="#!" role="button">
+        <i class="fa fa-github"></i>
+      </a>
+    </section>
+
+  </div>
+
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2022 Copyright:
+    <a class="text-white" href="https://tourxbootstrap.com/">TourX.com</a>
+  </div>
+
+</footer>
+
+<style>
+  .form-label {
+    color: white;
+  }
+</style>
+
+{% endblock %}

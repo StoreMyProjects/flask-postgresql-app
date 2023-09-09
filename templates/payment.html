@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div id="wrapper">
+
+    <!-- {% if msg %}
+        <div><h4 style="text-align: center; color: white;">{{ msg }}</h4></div>
+    {% endif %} -->
+
+    <div class="payment">
+        <h2>Payment Gateway</h2>
+        <!-- <div class="form"> -->
+            <form action="/payment" method="post">
+
+            <div class="card space icon-relative">
+                <label class="card-label">Card Holder Name</label>
+                <input type="text" class="input" placeholder="Name on Card">
+                <i class="fa fa-user"></i>
+            </div>
+
+            <div class="card space icon-relative">
+                <label class="card-label">Card Number</label>
+                <input type="text" class="input" inputmode="numeric" placeholder="Card Number">
+                <i class="fa fa-credit-card"></i>
+            </div>
+
+            <div class="card-group space">
+
+                <div class="card icon-relative" >
+                    <label class="card-label">Expiry Date</label>
+                    <input type="text" class="input" placeholder="25/25" name="expiry-date">
+                    <i class="fa fa-calendar"></i>
+                </div>
+
+                <div class="card icon-relative">
+                    <label class="card-label">CVV</label>
+                    <input type="text" class="input" placeholder="111" data-mask="111" name="cvv">
+                    <i class="fa fa-lock"></i>                        
+                </div>
+
+            </div>
+
+            <div class="d-grid gap-2 d-md-block d-md-flex justify-content-md-center">
+                <input class="btn btn-primary btn-lg" type="submit" value="Pay &#8377;{{ total_amount }}">
+            </div>
+            <!-- <div class="pay-btn">Pay</div> -->
+        </form>
+        <!-- </div> -->
+    </div>
+</div>
+
+<style>
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: darkgrey;
+}
+
+.payment {
+    background: whitesmoke;
+    max-width: 500px;
+    margin: 50px auto;
+    height: auto;
+    padding: 50px;
+    border-radius: 5px;
+    position: relative;
+}
+
+.payment h2 {
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    color:indigo;
+}
+
+.form, .card-label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 5px;
+    color: black;
+}
+
+.space {
+    margin-bottom: 20px;
+}
+
+.card-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pay-btn {
+    margin-top: 40px;
+    font-size: 16px;
+    text-align: center;
+    background: green;
+    color: whitesmoke;
+    padding: 12px;
+    border-radius: 5px;
+}
+
+.input {
+    padding: 12px 0px 12px 24px;
+    font-size: 16px;
+    text-align: center;
+    border: 2px solid blanchedalmond;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    width: 100%;
+}
+
+.icon-relative .fa {
+    font-size: 24px;
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+}
+
+</style>
+
+{% endblock %}

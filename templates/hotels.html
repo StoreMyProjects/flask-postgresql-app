@@ -1,0 +1,161 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/home">TourX</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('destinations') }}">Destinations</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('hotels') }}">Hotels</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('flights') }}">Flights</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('bookingdetails') }}">Bookings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('about') }}">About us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('profile') }}">
+            <i class="fa fa-user"></i>
+          </a>
+        </li>
+      </ul>
+    
+    </div>
+</nav>
+
+<!-- <h2 style="text-align: center;">Hotel Rooms</h2> -->
+<div style="background-image: url(https://media.architecturaldigest.com/photos/5c79899fe43f6f2dc024db21/16:9/w_2580,c_limit/Hyatt%20Regency%20Cleveland.jpg); height:100vh;">
+<div class="container-sm h-100">
+  <div class="row justify-content-center">
+    <div class="col-sm-9 p-5">
+        <form class="row g-3" action="/hotels" method="post">
+          
+          {% if msg %}
+            <div><h4 style="text-align: center; color: white;">{{ msg }}</h4></div>
+          {% endif %}
+
+          <div class="col-md-12">
+            <label for="cost" class="form-label">Choose Your Starting Budget Range:</label>
+            <select name="cost" class="form-select" id="cost" name="cost">
+            <option value="22000">22000</option>
+            <option value="25000">25000</option>
+            <option value="30000">30000</option>
+            <option value="35000">35000</option>
+            <option value="Above 35000 ">Above 35000 </option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputState" class="form-label">Hotel Category</label>
+            <select id="inputState" class="form-select" name="category" required>
+              <option selected>--Select--</option>
+                <option>5 Stars</option>
+                <option>4 Stars</option>
+                <option>3 Stars</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputState2" class="form-label">Room Type</label>
+            <select id="inputState2" class="form-select" name="room_type" required>
+              <option selected>--Select--</option>
+              <option>Luxury</option>
+              <option>Deluxe</option> 
+              <option>AC</option>
+              <option>Non-AC</option>
+            </select>
+          </div>
+
+          <div class="col-md-4">
+            <label for="noOfGuests" class="form-label">No. of guests</label>
+            <input type="number" class="form-control" id="noOfGuests" name="noOfGuests" required>
+          </div>
+
+          <div class="col-md-4">
+            <label for="departure" class="form-label">CheckIn Date</label>
+            <input type="date" class="form-control" id="departure" name="checkIn" required>
+          </div>
+          
+          <div class="col-md-4">
+            <label for="return" class="form-label">CheckOut Date</label>
+            <input type="date" class="form-control" id="return" name="checkOut">
+          </div>
+
+          <!-- <div class="col-md-4">
+            <label for="noOfDays" class="form-label">No of days</label>
+            <input type="number" class="form-control" id="noOfDays" name="noOfDays">
+          </div> -->
+          
+          <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-primary">Book Hotel Room</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="bg-dark text-center text-white">
+
+  <div class="container p-4 pb-0">
+
+    <section class="mb-4">
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998;" href="#!" role="button">
+        <i class="fa fa-facebook-f"></i>
+      </a>
+
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee;" href="#!" role="button">
+        <i class="fa fa-twitter"></i>
+      </a>
+
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #db4437;" href="#!" role="button">
+        <i class="fa fa-google"></i>
+      </a>
+
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #bc2a8d;" href="#!" role="button">
+        <i class="fa fa-instagram"></i>
+      </a>
+
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca;" href="#!" role="button">
+        <i class="fa fa-linkedin"></i>
+      </a>
+
+      <a class="btn btn-primary btn-floating m-1" style="background-color: #333333;" href="#!" role="button">
+        <i class="fa fa-github"></i>
+      </a>
+    </section>
+
+  </div>
+
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2022 Copyright:
+    <a class="text-white" href="https://tourxbootstrap.com/">TourX.com</a>
+  </div>
+
+</footer>
+
+<style>
+  .form-label {
+    color: white;
+  }
+</style>
+
+{% endblock %}

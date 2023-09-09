@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div style="height:130vh ; background: linear-gradient(150deg,#6147f1, #cc33cc);">
+    <div class="container-sm h-100">
+        <div class="row justify-content-center">
+            <div class="col-sm-9 p-5">
+                <h1 style="text-align: center; color: brown;">TourX</h1>
+
+                <!-- {% if msg %}
+                <div><h4 style="text-align: center; color: green;">{{ msg }}</h4></div>
+                {% endif %} -->
+
+                {% if error %}
+                <div><h4 style="text-align: center; color: red;">{{ error }}</h4></div>
+                {% endif %}
+                
+                <form class="card p-5" action="/register" method="post" style="background: linear-gradient(150deg,#9586eb, #ca8aca);">
+                    <h2 style="text-align: center; color: whitesmoke;">Create an account</h2>
+                    <div class="mb-3">
+                        Full Name <input id="name" type="text" class="form-control" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        Email <input id="email" type="email" class="form-control" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        Username <input type="text" class="form-control" aria-describedby="usernameHelp" name="username" required>
+                        <div id="usernameHelp" class="form-text"> username must contain only letters and numbers, and letters must be lowercase.</div>
+                    </div>
+                    <div class="mb-3">
+                        Password <input id="pass" type="password" class="form-control" aria-describedby="passwordHelpBlock" name="password" required>
+                        <div id="passwordHelpBlock" class="form-text"> password must be 6-12 characters long, contain atleast one uppercase & lowercase letters, numbers and special characters (@#$), and must not contain spaces or emoji.</div>
+                    </div>
+                    <div class="mb-3">
+                        Confirm Password <input id="pass" type="password" class="form-control" aria-describedby="passwordHelpBlock1" name="confirm" required>
+                    </div>
+                    <div class="d-grid gap-2 d-md-block d-md-flex justify-content-md-center">
+                        <input class="btn btn-primary" type="submit" value="Register">
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ url_for('login') }}">Already Registered? Go back to Login</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-center text-white">
+
+    <div class="container p-4 pb-0">
+
+      <section class="mb-4">
+        <a class="btn btn-primary btn-floating m-1" style="background-color: #3b5998;" href="#!" role="button">
+          <i class="fa fa-facebook-f"></i>
+        </a>
+
+        <a class="btn btn-primary btn-floating m-1" style="background-color: #55acee;" href="#!" role="button">
+          <i class="fa fa-twitter"></i>
+        </a>
+
+        <a class="btn btn-primary btn-floating m-1" style="background-color: #db4437;" href="#!" role="button">
+          <i class="fa fa-google"></i>
+        </a>
+
+        <a class="btn btn-primary btn-floating m-1" style="background-color: #bc2a8d;" href="#!" role="button">
+          <i class="fa fa-instagram"></i>
+        </a>
+
+        <a class="btn btn-primary btn-floating m-1" style="background-color: #0082ca;" href="#!" role="button">
+          <i class="fa fa-linkedin"></i>
+        </a>
+
+        <a class="btn btn-primary btn-floating m-1" style="background-color: #333333;" href="#!" role="button">
+          <i class="fa fa-github"></i>
+        </a>
+      </section>
+
+    </div>
+
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2022 Copyright:
+      <a class="text-white" href="https://tourxbootstrap.com/">TourX.com</a>
+    </div>
+
+  </footer>
+
+{% endblock %}

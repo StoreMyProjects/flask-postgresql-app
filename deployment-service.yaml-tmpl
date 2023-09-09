@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tourx
+  template:
+    metadata:
+      labels:
+        app: tourx
+    spec:
+      containers:
+      - name: tourx
+        image: amrendra01/flask-app:img_tag
+
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-deployment-lb
+  labels:
+    app: tourx
+spec:
+  selector:
+    app: tourx
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
+  type: LoadBalancer
