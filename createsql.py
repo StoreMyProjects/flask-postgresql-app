@@ -7,11 +7,11 @@ createsql = Blueprint('createsql', __name__)
 def get_db():
     # Create a connection to the database
     conn = psycopg2.connect(
-        dbname="flaskdb",
-        user='postgres',
-        password="123456789",
-        host='flaskdb.ce2bgribc0sr.ap-south-1.rds.amazonaws.com',
-        port='5432'
+        dbname="dbname",
+        user='user',
+        password="user",
+        host='host',
+        port='port'
     )
     return conn
 

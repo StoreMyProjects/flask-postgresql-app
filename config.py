@@ -1,4 +1,4 @@
-SECRET_KEY = 'a1b2c3d4e5f6'
+SECRET_KEY = 'your_secret_key'
 SESSION_PERMANENT = False
 SESSION_TYPE = "filesystem"
 DEBUG = True
