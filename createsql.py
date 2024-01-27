@@ -9,10 +9,10 @@ def get_db():
         # Create a connection to the database
         conn = psycopg2.connect(
             dbname="dbname",
-            user='user',
-            password="user",
-            host='host',
-            port='port'
+            user='your_user',
+            password="your_password",
+            host='your_db_hostname',
+            port='5432'
         )
         return conn
     
