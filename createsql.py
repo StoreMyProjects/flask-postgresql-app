@@ -5,20 +5,21 @@ createsql = Blueprint('createsql', __name__)
 
 @createsql.route('/connect')
 def get_db():
-    # Create a connection to the database
-    conn = psycopg2.connect(
-        dbname="dbname",
-        user='user',
-        password="user",
-        host='host',
-        port='port'
-    )
-    return conn
+    try:
+        # Create a connection to the database
+        conn = psycopg2.connect(
+            dbname="dbname",
+            user='user',
+            password="user",
+            host='host',
+            port='port'
+        )
+        conn.close()
 
-# @createsql.teardown_app_request
-# def close_db(error):
-#     if 'db' in g:
-#         g.db.close()
+        return jsonify({"message": "Connection successful"})
+    
+    except psycopg2.Error as e:
+        return jsonify({"error": str(e)})
 
 @createsql.route('/createdb')
 def create_database():
@@ -31,19 +32,22 @@ def create_database():
         cur.execute("CREATE DATABASE flaskdb")
         cur.close()
         conn.close()
-
-        return True
+        return jsonify({'message': 'Database created successfully!'})
 
     except Exception as e:
-        print(f"Error creating database: {e}")
-        return False
+        return jsonify({'error': str(e)})
 
 @createsql.route('/createtable')
 def create_table():
     try:
         conn = get_db()
+        if conn is None:
+            # If connection failed, return an error response
+            return jsonify({'error': 'Failed to connect to the database'})
+
         conn.autocommit = True 
         cur= conn.cursor()
+
         # Create required tables
         cur.execute('''
             CREATE TABLE IF NOT EXISTS users (
@@ -129,6 +133,10 @@ def create_table():
 def deletetables():
     try:
         conn = get_db()
+        if conn is None:
+            # If connection failed, return an error response
+            return jsonify({'error': 'Failed to connect to the database'})
+
         conn.autocommit = True  # Disable transactions for database creation
         cur = conn.cursor()
 
