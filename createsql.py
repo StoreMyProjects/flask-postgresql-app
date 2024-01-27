@@ -14,12 +14,12 @@ def get_db():
             host='host',
             port='port'
         )
-        conn.close()
-
-        return jsonify({"message": "Connection successful"})
+        return conn
     
     except psycopg2.Error as e:
-        return jsonify({"error": str(e)})
+        # If an error occurs during connection, return None or handle appropriately
+        print("Database connection error:", e)
+        return None
 
 @createsql.route('/createdb')
 def create_database():
