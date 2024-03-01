@@ -1,6 +1,6 @@
 FROM postgres:latest
 
-ENV POSTGRES_DB=tourxdb
+ENV POSTGRES_DB=exploreexpeditionsdb
 ENV POSTGRES_USER=your_user
 ENV POSTGRES_PASSWORD=your_password
 

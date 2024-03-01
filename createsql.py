@@ -8,7 +8,7 @@ def get_db():
     try:
         # Create a connection to the database
         conn = psycopg2.connect(
-            dbname="tourxdb",
+            dbname="exploreexpeditionsdb",
             user='your_user',
             password="your_password",
             host='your_db_hostname',
@@ -31,7 +31,7 @@ def create_database():
         cur = conn.cursor()
 
         # Create a new database
-        cur.execute("CREATE DATABASE flaskdb")
+        cur.execute("CREATE DATABASE exploreexpeditionsdb")
         cur.close()
         conn.close()
         return jsonify({'message': 'Database created successfully!'})
