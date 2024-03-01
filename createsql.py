@@ -53,7 +53,7 @@ def create_table():
         # Create required tables
         cur.execute('''
             CREATE TABLE IF NOT EXISTS users (
-                name text NOT NULL,
+                fullname text NOT NULL,
                 email text NOT NULL,
                 username text NOT NULL PRIMARY KEY,
                 password text NOT NULL
@@ -99,7 +99,7 @@ def create_table():
 
         cur.execute('''CREATE TABLE IF NOT EXISTS bookings (
                     id SERIAL NOT NULL PRIMARY KEY ,
-                    name text NOT NULL,
+                    fullname text NOT NULL,
                     email text NOT NULL,
                     passengers int NOT NULL,
                     package_name text NOT NULL,
