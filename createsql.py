@@ -8,7 +8,7 @@ def get_db():
     try:
         # Create a connection to the database
         conn = psycopg2.connect(
-            dbname="dbname",
+            dbname="tourxdb",
             user='your_user',
             password="your_password",
             host='your_db_hostname',
