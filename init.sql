@@ -66,4 +66,4 @@ CREATE TABLE IF NOT EXISTS bookings (
     username text REFERENCES users(username)
 );
 
-INSERT INTO users (fullname, email, username, password) VALUES ('The Explorer', 'theexplorer@tourx.com', 'root', 'root');
+INSERT INTO users (fullname, email, username, password) VALUES ('The Explorer', 'theexplorer@tourx.com', 'root', 'pbkdf2:sha256:600000$jBhsqVtV5bLLxaIw$55a9b6a3a4ddd0451baa7697db49ba8f22e6f54d1e82595add1b0e4d665f6a13');
