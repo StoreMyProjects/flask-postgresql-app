@@ -1,7 +1,3 @@
-CREATE DATABASE tourxdb;
-
-\c tourxdb;
-
 CREATE TABLE IF NOT EXISTS users (
     fullname text NOT NULL,
     email text NOT NULL,
