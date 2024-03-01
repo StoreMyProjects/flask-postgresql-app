@@ -25,6 +25,8 @@ def get_db():
 def create_database():
     try:
         conn = get_db()
+        if conn is None:
+            return jsonify({'error': 'Failed to connect to the database'})
         conn.autocommit = True  # Disable transactions for database creation
         cur = conn.cursor()
 

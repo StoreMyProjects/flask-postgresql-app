@@ -30,7 +30,7 @@ def home():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == "POST":
-        name = request.form.get('name')
+        fullname = request.form.get('fullname')
         email = request.form.get('email')
         username = request.form.get('username')
         password = request.form.get('password')
@@ -57,7 +57,7 @@ def register():
                 passwd = generate_password_hash(password)
                 conn = get_db()
                 db = conn.cursor()
-                db.execute("insert into users values(%s,%s,%s,%s)", (name, email, username, passwd))
+                db.execute("insert into users values(%s,%s,%s,%s)", (fullname, email, username, passwd))
                 conn.commit()
                 msg = "you are registered successfully!"
                 return render_template("login.html", msg = msg)
@@ -89,10 +89,10 @@ def login():
             # print(x)
             if username == user[2] and check_password_hash(user[3], passwd):
                 # print("user found")
-                name = user[0]
+                fullname = user[0]
                 email = user[1]
                 session["LoggedIn"] = True
-                session['name'] = name
+                session['fullname'] = fullname
                 session['username'] = username
                 session['email'] = email
                 return redirect(url_for("profile"))
@@ -393,7 +393,7 @@ def payment():
         total_amount = (int(dest_pack) * no_of_guests) + (int(hotel_cost) * no_of_guests) + (int(flight_cost) * passengers)
         
         try:
-            db.execute("insert into bookings values(DEFAULT, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(session['name'], session['email'], passengers, package_name, place, no_of_days, date_now, time_now, category, room_type, no_of_guests, check_in_date, check_out_date, trip_type, class_type, departure_d, return_d, source, destination, total_amount, session['username']))
+            db.execute("insert into bookings values(DEFAULT, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",(session['fullname'], session['email'], passengers, package_name, place, no_of_days, date_now, time_now, category, room_type, no_of_guests, check_in_date, check_out_date, trip_type, class_type, departure_d, return_d, source, destination, total_amount, session['username']))
             conn.commit()
         # except(Exception, psycopg2.Error) as error:
         except:
