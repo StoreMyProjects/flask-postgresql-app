@@ -4,6 +4,7 @@ metadata:
   name: psql-initdb-config
 data:
   init.sql: |
+    CREATE DATABASE exploreexpeditionsdb;
     \c exploreexpeditionsdb;
 
     CREATE TABLE IF NOT EXISTS users (
