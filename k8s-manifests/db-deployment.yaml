@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresdb
+  labels:
+    app: postgresdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgresdb
+  template:
+    metadata:
+      labels:
+        app: postgresdb
+    spec:
+      containers:
+        - name: postgresdb
+          image: amrendra01/exploreexpeditionsapp:latest
+          env:
+            - name: your_user
+              value: "root"
+            - name: your_password
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+                  key: YOUR_PASSWORD
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgres-initdb
+              mountPath: docker-entrypoint-initdb.d
+      volumes:
+        - name: postgres-initdb
+          configMap:
+            name: postgres-initdb-config    # Config name

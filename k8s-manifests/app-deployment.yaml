@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: two-tier-app
+  labels:
+    app: two-tier-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: two-tier-app
+  template:
+    metadata:
+      labels:
+        app: two-tier-app
+    spec:
+      containers:
+        - name: two-tier-app
+          image: amrendra01/exploreexpeditionsapp:latest
+          env:
+            - name: PG_HOST
+              value: "10.8.65.117"
+            - name: your_password
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+                  key: YOUR_PASSWORD
+            - name: your_user
+              value: "root"
+          ports:
+            - containerPort: 5000
+          imagePullPolicy: Always
