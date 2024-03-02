@@ -1,3 +1,6 @@
 __pycache__
 flask_session
 copysql.py
+Jenkinsfile
+deployment-service.yaml
+deployment-service.yaml-tmpl
