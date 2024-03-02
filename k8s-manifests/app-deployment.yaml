@@ -18,13 +18,13 @@ spec:
         - name: two-tier-app
           image: amrendra01/exploreexpeditionsapp:latest
           env:
-            - name: host
-              value: "10.8.65.117"
-            - name: dbname
+            - name: DB_HOST
+              value: "172.20.93.97"
+            - name: DB_NAME
               value: "exploreexpeditionsdb"
-            - name: user
+            - name: DB_USER
               value: "your_user"
-            - name: password
+            - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: my-secret
