@@ -33,4 +33,4 @@ spec:
       volumes:
         - name: postgres-initdb
           configMap:
-            name: postgres-initdb-config    # Config name
+            name: psql-initdb-config    # Config name
