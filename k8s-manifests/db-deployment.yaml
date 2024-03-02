@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: postgresdb
-          image: amrendra01/exploreexpeditionsapp:latest
+          image: amrendra01/exploreexpeditionsdb:latest
           env:
             - name: your_user
               value: "root"
