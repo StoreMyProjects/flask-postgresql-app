@@ -18,13 +18,10 @@ spec:
         - name: postgresdb
           image: postgres:latest
           env:
-            - name: your_user
-              value: "root"
-            - name: your_password
-              valueFrom:
-                secretKeyRef:
-                  name: my-secret
-                  key: YOUR_PASSWORD
+            - name: POSTGRES_DB
+              value: "exploreexpeditionsdb"
+            - name: POSTGRES_USER
+              value: "your_user"
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:

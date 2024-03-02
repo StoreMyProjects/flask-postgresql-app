@@ -18,15 +18,17 @@ spec:
         - name: two-tier-app
           image: amrendra01/exploreexpeditionsapp:latest
           env:
-            - name: PG_HOST
+            - name: host
               value: "10.8.65.117"
-            - name: your_password
+            - name: dbname
+              value: "exploreexpeditionsdb"
+            - name: user
+              value: "your_user"
+            - name: password
               valueFrom:
                 secretKeyRef:
                   name: my-secret
-                  key: YOUR_PASSWORD
-            - name: your_user
-              value: "root"
+                  key: POSTGRES_PASSWORD
           ports:
             - containerPort: 5000
           imagePullPolicy: Always
