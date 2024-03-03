@@ -31,8 +31,9 @@ def create_database():
         conn.autocommit = True  # Disable transactions for database creation
         cur = conn.cursor()
 
+        dbname=os.environ.get("DB_NAME")
         # Create a new database
-        cur.execute("CREATE DATABASE exploreexpeditionsdb")
+        cur.execute(f"CREATE DATABASE ${dbname}")
         cur.close()
         conn.close()
         return jsonify({'message': 'Database created successfully!'})
