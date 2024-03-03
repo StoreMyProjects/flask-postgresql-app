@@ -11,6 +11,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <style>
+      /* Styles for the popup */
+      .popup {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: white;
+          padding: 20px;
+          border: 1px solid black;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+          display: none;
+      }
+  </style>
     
     <title>Explore Expeditions</title>
   </head>
@@ -60,8 +75,26 @@
     </nav>
       
     <div style="background-color: brown; height: 700px;">
-      <h3 style="color: whitesmoke;">Welcome, {{ session.username }}! Please explore Destinations section to see our best destination places</h3>
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <!-- Popup message -->
+    <div id="popup" class="popup">
+      <h3 style="color: whitesmoke;">Welcome, <span id="username"></span>! Please explore the Destinations section to see our best destination places.</h3>
+    </div>
+      <script>
+          // Get the username from session or replace it with the actual username
+          var username = "{{ session.username }}";
+          // Display the username in the popup
+          document.getElementById("username").innerText = username;
+
+          // Show the popup
+          var popup = document.getElementById("popup");
+          popup.style.display = "block";
+
+          // Hide the popup after 3 seconds
+          setTimeout(function(){
+              popup.style.display = "none";
+          }, 3000);
+      </script>
+          <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
