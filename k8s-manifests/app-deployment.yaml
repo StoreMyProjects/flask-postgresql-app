@@ -25,10 +25,6 @@ spec:
             - name: DB_USER
               value: "your_user"
             - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: my-secret
-                  key: POSTGRES_PASSWORD
-          ports:
+              value: "your_password"
             - containerPort: 5000
           imagePullPolicy: Always
