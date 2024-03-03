@@ -26,5 +26,6 @@ spec:
               value: "your_user"
             - name: DB_PASSWORD
               value: "your_password"
+        - ports:
             - containerPort: 5000
           imagePullPolicy: Always
