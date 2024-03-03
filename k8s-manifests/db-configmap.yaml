@@ -4,6 +4,15 @@ metadata:
   name: psql-initdb-config
 data:
   init.sql: |
+    DO $$ 
+    BEGIN 
+        IF NOT EXISTS (SELECT FROM pg_database WHERE datname = 'exploreexpeditionsdb') THEN
+            CREATE DATABASE exploreexpeditionsdb;
+        END IF; 
+    END $$;
+    
+    \c exploreexpeditionsdb;
+
     CREATE TABLE IF NOT EXISTS users (
         fullname text NOT NULL,
         email text NOT NULL,
