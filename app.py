@@ -105,130 +105,43 @@ def login():
             return render_template("login.html", error = error)
     return render_template("login.html")
 
+PACKAGE_DETAILS = {
+    'Spain': {'place': 'Barcelona', 'num_of_days': 10, 'estimated_cost': 220000},
+    'India': {'place': 'Goa', 'num_of_days': 10, 'estimated_cost': 153000},
+    'Switzerland': {'place': 'Zurich', 'num_of_days': 10, 'estimated_cost': 117500},
+    'Belgium': {'place': 'Dinant', 'num_of_days': 8, 'estimated_cost': 213000},
+    'Italy': {'place': 'Venice', 'num_of_days': 8, 'estimated_cost': 118000},
+    'Australia': {'place': 'Sydney', 'num_of_days': 8, 'estimated_cost': 210000},
+    'Ireland': {'place': 'Dublin', 'num_of_days': 8, 'estimated_cost': 119000},
+    'New Zealand': {'place': 'Mount Cook', 'num_of_days': 8, 'estimated_cost': 217000},
+    'Canada': {'place': 'Big Muddy Valley', 'num_of_days': 5, 'estimated_cost': 187100},
+    'Venezuela': {'place': 'Angel Falls', 'num_of_days': 5, 'estimated_cost': 115000},
+    'Arizona': {'place': 'Tucson', 'num_of_days': 5, 'estimated_cost': 215000},
+    'Norway': {'place': 'Bergen', 'num_of_days': 10, 'estimated_cost': 210000},
+    'Myanmar': {'place': 'Shwedagon Pagoda', 'num_of_days': 8, 'estimated_cost': 211000},
+    'Namibia': {'place': 'Namibia', 'num_of_days': 8, 'estimated_cost': 117300},
+    'French Polynesia': {'place': 'Skeleton Coast', 'num_of_days': 5, 'estimated_cost': 215700},
+    'Iceland': {'place': 'Skogafoss', 'num_of_days': 10, 'estimated_cost': 218200},
+    'Greece': {'place': 'Athens', 'num_of_days': 9, 'estimated_cost': 214800},
+    'China': {'place': 'Beijing', 'num_of_days': 6, 'estimated_cost': 115900},
+    'Germany': {'place': 'Berlin', 'num_of_days': 5, 'estimated_cost': 116500},
+    'Chile': {'place': 'Easter Island', 'num_of_days': 8, 'estimated_cost': 119000}
+}
 
 @app.route('/destinations', methods=['GET', 'POST'])
 @login_required
 def destinations():
     if request.method == "POST":
-        if request.form.get("selected_package") == "Spain":
-            package_name = "Spain Package"
-            place = "Barcelona"
-            num_of_days = 10
-            estimated_cost = 220000
+        selected_package = request.form.get('selected_package')
+        if not selected_package:
+            msg = 'Please select a package!'
+            return render_template("destinations.html", msg = msg)
+        package_name = PACKAGE_DETAILS[selected_package]
 
-        elif request.form.get("selected_package") == "India":
-            package_name = "India Package"
-            place = "Goa"
-            num_of_days = 10
-            estimated_cost = 153000
-
-        elif request.form.get("selected_package") == "Switzerland":
-            package_name = "Switzerland Package"
-            place = "Zurich"
-            num_of_days = 10
-            estimated_cost = 117500
-
-        elif request.form.get("selected_package") == "Belgium":
-            package_name = "Belgium Package"
-            place = "Dinant"
-            num_of_days = 8
-            estimated_cost = 213000
-
-        elif request.form.get("selected_package") == "Italy":
-            package_name = "Italy Package"
-            place = "Venice"
-            num_of_days = 8
-            estimated_cost = 118000
-
-        elif request.form.get("selected_package") == "Australia":
-            package_name = "Australia Package"
-            place = "Sydney"
-            num_of_days = 8
-            estimated_cost = 210000
-
-        elif request.form.get("selected_package") == "Ireland":
-            package_name = "Ireland Package"
-            place = "Dublin"
-            num_of_days = 8
-            estimated_cost = 119000
-
-        elif request.form.get("selected_package") == "New Zealand":
-            package_name = "New Zealand Package"
-            place = "Mount Cook"
-            num_of_days = 8
-            estimated_cost = 217000
-
-        elif request.form.get("selected_package") == "Canada":
-            package_name = "Canada Package"
-            place = "Big Muddy Valley"
-            num_of_days = 5
-            estimated_cost = 187100
-
-        elif request.form.get("selected_package") == "Venezuela":
-            package_name = "Venezuela Package"
-            place = "Angel Falls"
-            num_of_days = 5
-            estimated_cost = 115000
-
-        elif request.form.get("selected_package") == "Arizona":
-            package_name = "Arizona Package"
-            place = "Tucson"
-            num_of_days = 5
-            estimated_cost = 215000
-
-        elif request.form.get("selected_package") == "Norway":
-            package_name = "Norway Package"
-            place = "Bergen"
-            num_of_days = 10
-            estimated_cost = 210000
-
-        elif request.form.get("selected_package") == "Myanmar":
-            package_name = "Myanmar Package"
-            place = "Shwedagon Pagoda"
-            num_of_days = 8
-            estimated_cost = 211000
-
-        elif request.form.get("selected_package") == "Namibia":
-            package_name = "Namibia Package"
-            place = "Namibia"
-            num_of_days = 8
-            estimated_cost = 117300
-
-        elif request.form.get("selected_package") == "French Polynesia":
-            package_name = "French Polynesia Package"
-            place = "Skeleton Coast"
-            num_of_days = 5
-            estimated_cost = 215700
-
-        elif request.form.get("selected_package") == "Iceland":
-            package_name = "Iceland Package"
-            place = "Skogafoss"
-            num_of_days = 10
-            estimated_cost = 218200
-
-        elif request.form.get("selected_package") == "Greece":
-            package_name = "Greece Package"
-            place = "Athens"
-            num_of_days = 9
-            estimated_cost = 214800
-
-        elif request.form.get("selected_package") == "China":
-            package_name = "China Package"
-            place = "Beijing"
-            num_of_days = 6
-            estimated_cost = 115900
-
-        elif request.form.get("selected_package") == "Germany":
-            package_name = "Germany Package"
-            place = "Berlin"
-            num_of_days = 5
-            estimated_cost = 116500
-
-        else:
-            package_name = "Chile Package"
-            place = "Easter Island"
-            num_of_days = 8
-            estimated_cost = 119000
+        if package_name:
+            place = package_name['place']
+            num_of_days = package_name['num_of_days']
+            estimated_cost = package_name['estimated_cost']
 
         try:
             conn = get_db()
@@ -258,19 +171,8 @@ def hotels():
         check_out_date = request.form.get('checkOut')
         # no_of_days = request.form.get('noOfDays')
 
-        check_in = tuple(check_in_date.split('-'))
-        check_out = tuple(check_out_date.split('-'))
-
-        year = int(check_in[0])
-        month = int(check_in[1])
-        day = int(check_in[2])
-
-        year1 = int(check_out[0])
-        month1 = int(check_out[1])
-        day1 = int(check_out[2])
-        
-        checkInDate = datetime.date(year,month,day)
-        checkOutDate = datetime.date(year1,month1,day1)
+        checkInDate = datetime.datetime.strptime(check_in_date, '%Y-%m-%d')
+        checkOutDate = datetime.datetime.strptime(check_out_date, '%Y-%m-%d')
 
         if checkInDate < checkOutDate:
             try:
@@ -305,21 +207,10 @@ def flights():
         destination = request.form.get('destination')
 
         if trip_type == "Round Trip":
-            departure_date = tuple(departure_d.split('-'))
-            return_date = tuple(return_d.split('-'))
+            departure_date = datetime.datetime.strptime(departure_d, '%Y-%m-%d')
+            return_date = datetime.datetime.strptime(return_d, '%Y-%m-%d')
 
-            year = int(departure_date[0])
-            month = int(departure_date[1])
-            day = int(departure_date[2])
-
-            year1 = int(return_date[0])
-            month1 = int(return_date[1])
-            day1 = int(return_date[2])
-            
-            checkInDate = datetime.date(year,month,day)
-            checkOutDate = datetime.date(year1,month1,day1)
-
-            if checkInDate < checkOutDate:
+            if departure_date < return_date:
                 try:
                     conn = get_db()
                     db = conn.cursor()
