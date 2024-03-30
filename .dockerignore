@@ -1,0 +1,5 @@
+k8s-manifests/
+.gitignore
+Dockerfile.app
+Dockerfile.psqldb
+README.md
