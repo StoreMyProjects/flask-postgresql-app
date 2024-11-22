@@ -300,20 +300,23 @@ def payment():
 @login_required
 def bookingdetails():
     if request.method == "GET":
-        with sqlite3.connect('tour.db') as db:
-            try:
-                db.row_factory = sqlite3.Row
-                cur = db.cursor()
-                if session['username'] == "root":
-                    cur.execute("select * from bookings")
-                    rows = cur.fetchall()
-                else:
-                    cur.execute("select * from bookings inner join users on users.username=bookings.username and users.username = ?", (session['username'],))
-                    rows = cur.fetchall()
-                return render_template("bookings.html", rows=rows)
-            except:
-                msg = "No Bookings yet!"
-                return render_template("bookings.html", msg = msg)
+        try:
+            conn = get_db()
+            db = conn.cursor()
+            if session['username'] == "root":
+                db.execute("select * from bookings")
+            else:
+                db.execute("select * from bookings inner join users on users.username=bookings.username and users.username = ?", (session['username'],))
+            rows = db.fetchall()
+            return render_template("bookings.html", rows=rows)
+        except:
+            msg = "No Bookings yet!"
+            return render_template("bookings.html", msg = msg)
+        finally:
+            if db:
+                db.close()
+            if conn:
+                conn.close()
     return render_template("home.html")
 
 
