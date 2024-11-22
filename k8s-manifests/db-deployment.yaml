@@ -21,7 +21,7 @@ spec:
             - name: POSTGRES_DB
               value: "exploreexpeditionsdb"
             - name: POSTGRES_USER
-              value: "your_user"
+              value: "postgres"
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
