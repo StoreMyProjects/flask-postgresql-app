@@ -312,11 +312,7 @@ def bookingdetails():
         except:
             msg = "No Bookings yet!"
             return render_template("bookings.html", msg = msg)
-        finally:
-            if db:
-                db.close()
-            if conn:
-                conn.close()
+
     return render_template("home.html")
 
 
