@@ -146,7 +146,7 @@ def destinations():
         try:
             conn = get_db()
             db = conn.cursor()
-            db.execute("Insert into destinations values(DEFAULT ,%s,%s,%s,%s,%s,%s)",( session['email'], package_name, place, num_of_days, estimated_cost, session['username'] ))
+            db.execute("Insert into destinations values(DEFAULT ,%s,%s,%s,%s,%s,%s)",( session['email'], selected_package, place, num_of_days, estimated_cost, session['username'] ))
             conn.commit()       
             msg = "package added successfully!"
             return render_template('hotels.html', msg = msg)
@@ -306,7 +306,7 @@ def bookingdetails():
             if session['username'] == "root":
                 db.execute("select * from bookings")
             else:
-                db.execute("select * from bookings inner join users on users.username=bookings.username and users.username = ?", (session['username'],))
+                db.execute("select * from bookings inner join users on users.username=bookings.username and users.username = %s", (session['username'],))
             rows = db.fetchall()
             return render_template("bookings.html", rows=rows)
         except:

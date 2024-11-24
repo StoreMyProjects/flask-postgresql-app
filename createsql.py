@@ -22,24 +22,24 @@ def get_db():
         print("Database connection error:", e)
         return None
 
-@createsql.route('/createdb')
-def create_database():
-    try:
-        conn = get_db()
-        if conn is None:
-            return jsonify({'error': 'Failed to connect to the database'})
-        conn.autocommit = True  # Disable transactions for database creation
-        cur = conn.cursor()
+# @createsql.route('/createdb')
+# def create_database():
+#     try:
+#         conn = get_db()
+#         if conn is None:
+#             return jsonify({'error': 'Failed to connect to the database'})
+#         conn.autocommit = True  # Disable transactions for database creation
+#         cur = conn.cursor()
 
-        dbname=os.environ.get("DB_NAME")
-        # Create a new database
-        cur.execute(f"CREATE DATABASE ${dbname}")
-        cur.close()
-        conn.close()
-        return jsonify({'message': 'Database created successfully!'})
+#         dbname=os.environ.get("DB_NAME")
+#         # Create a new database
+#         cur.execute(f"CREATE DATABASE ${dbname}")
+#         cur.close()
+#         conn.close()
+#         return jsonify({'message': 'Database created successfully!'})
 
-    except Exception as e:
-        return jsonify({'error': str(e)})
+#     except Exception as e:
+#         return jsonify({'error': str(e)})
 
 @createsql.route('/createtable')
 def create_table():
