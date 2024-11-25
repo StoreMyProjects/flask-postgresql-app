@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-import psycopg2
+import psycopg
 import os
 
 createsql = Blueprint('createsql', __name__)
@@ -8,7 +8,7 @@ createsql = Blueprint('createsql', __name__)
 def get_db():
     try:
         # Create a connection to the database
-        conn = psycopg2.connect(
+        conn = psycopg.connect(
             dbname=os.environ.get("DB_NAME"),
             user=os.environ.get("DB_USER"),
             password=os.environ.get("DB_PASSWORD"),
@@ -17,7 +17,7 @@ def get_db():
         )
         return conn
     
-    except psycopg2.Error as e:
+    except psycopg.Error as e:
         # If an error occurs during connection, return None or handle appropriately
         print("Database connection error:", e)
         return None
