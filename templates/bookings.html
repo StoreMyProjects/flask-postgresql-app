@@ -110,6 +110,10 @@
                 <td>{{ row[18] }}</td>
                 <td>{{ row[19] }}</td>
                 <td>{{ row[20] }}</td>
+                <td><form action="/delete_booking" method="post">
+                    <input type="hidden" name="booking_id" value="{{ row[0] }}">
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                </form></td>
             </tr>
             {% endfor %}
         </table>
