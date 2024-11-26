@@ -1,5 +1,5 @@
 # flask-postgesql-app
-This deploys flask app and postgres db on kubernetes cluster using docker images.
+This deploys flask app and postgres db docker containers on a Kubernetes cluster.
 
 ## Prerequisites
 
@@ -40,29 +40,21 @@ terraform apply --auto-approve
 aws eks --region <your-aws-region> update-kubeconfig --name <output.cluster_name>
 ```
 
-### Clone this repo and navigate to flask-postgres-app/k8s-manifests and execute below commands
+### Install ArgoCD on your eks cluster.
 ```
-kubectl create namespace flaskpro
-kubectl apply -f db-secrets.yaml -n flaskpro
-kubectl apply -f db-configmap.yaml -n flaskpro
-kubectl apply -f db-deployment.yaml -n flaskpro
-kubectl apply -f db-service.yaml -n flaskpro
-
-kubectl get svc -n flaskpro
-```
-#### Copy cluster-ip of postgres svc and edit app-deployment.yaml and replace DB_HOST value with it.
-```
-kubectl apply -f app-deployment.yaml -n flaskpro
-kubectl apply -f app-service.yaml -n flaskpro
-
-kubectl get svc -n flaskpro
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.13.1/manifests/install.yaml
+kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
-### Copy external-ip of app svc paste it on browser window with it's service port - external-ip:port
-
-#### Some basic kubernetes commands used for debugging pods
+### Get ArgoCD admin user password to login from UI
 ```
-kubectl get pods -n namespace
-kubectl logs pod_name -n namespace
-kubectl exec -it pod_name -n namespace -- /bin/bash
+kubectl get secrets argocd-initial-admin-secret -n argocd -o yaml
+```
+
+### Create ArgoCD applications.
+
+## To destroy resources 
+```
+terraform destroy --auto-approve
 ```
