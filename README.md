@@ -51,10 +51,19 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 kubectl get secrets argocd-initial-admin-secret -n argocd -o yaml
 ```
+### To decode encrypted password - replace below password with actual password
+```
+echo password | base64 --decode
+```
 
-### Create ArgoCD applications.
+### Create ArgoCD applications using below yaml files or you can create them directly from UI.
+```
+cd k8s-manifests/argocd-apps
+kubectl apply -f db.yaml -n argocd
+kubectl apply -f app.yaml -n argocd
+```
 
-## To destroy resources 
+## To destroy resources in one go.
 ```
 terraform destroy --auto-approve
 ```
