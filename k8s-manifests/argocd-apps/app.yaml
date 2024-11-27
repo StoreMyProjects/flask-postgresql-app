@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata: flask-app
+spec:
+  destination:
+    name: ''
+    namespace: myapp
+    server: 'YOUR K8S CLUSTER URL'
+  source:
+    path: k8s-manifests/app
+    repoURL: https://github.com/StoreMyProjects/flask-postgresql-app
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
