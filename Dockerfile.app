@@ -1,6 +1,6 @@
 FROM python:3.9-slim-buster
 
-RUN yum install wkhtmltopdf -y
+RUN apt update -y && apt install wkhtmltopdf -y
 
 WORKDIR /app
 
