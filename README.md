@@ -86,7 +86,7 @@ helm install grafana grafana/grafana -n monitoring
 ```
 kubectl expose svc/prometheus-server --type NodePort --target-port 9090 --name prometheus-server-ext -n monitoring
 kubectl expose svc/grafana --type NodePort --target-port 3000 --name grafana-ext -n monitoring
-kubetl port-forward svc/prometheus-server-ext 9090:80 -n monitoring
+kubectl port-forward svc/prometheus-server-ext 9090:80 -n monitoring
 kubectl port-forward svc/grafana-ext 3000:80 -n monitoring
 ```
 
