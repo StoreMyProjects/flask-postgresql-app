@@ -3,6 +3,8 @@ kind: ConfigMap
 metadata:
   name: psql-initdb-config
 data:
+  POSTGRES_DB: exploreexpeditionsdb
+  POSTGRES_USER: postgres
   init.sql: |
     DO $$ 
     BEGIN 
