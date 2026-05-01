@@ -1,0 +1,56 @@
+name: CI-CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  AWS_REGION: ap-south-1
+  ECR_REPOSITORY: exploreexpeditionsapp
+  CLUSTER_NAME: devops-eks
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to ECR
+        run: |
+          aws ecr get-login-password --region $AWS_REGION | \
+          docker login --username AWS --password-stdin \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com
+
+      - name: Build Docker image
+        run: |
+          docker build -t $ECR_REPOSITORY:latest . -f Dockerfile.app
+
+      - name: Tag image
+        run: |
+          docker tag $ECR_REPOSITORY:latest \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest
+
+      - name: Push image to ECR
+        run: |
+          docker push \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:latest
+
+      - name: Update kubeconfig
+        run: |
+          aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME
+
+      - name: Deploy to EKS
+        run: |
+          kubectl apply -f k8s-manifests/db/
+          kubectl apply -f k8s-manifests/app/
+          
+          
