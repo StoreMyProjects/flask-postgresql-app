@@ -14,6 +14,7 @@ spec:
       labels:
         app: two-tier-app
     spec:
+      serviceAccountName: two-tier-app-sa
       containers:
         - name: two-tier-app
           image: amrendra01/exploreexpeditionsapp:latest

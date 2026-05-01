@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: app-config
 data:
-  DB_HOST: postgresdb-svc
+  DB_HOST: postgresdb
   DB_NAME: exploreexpeditionsdb
   DB_USER: postgres
