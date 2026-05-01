@@ -1,6 +1,6 @@
-FROM python:3.9-slim-buster
+FROM surnet/alpine-wkhtmltopdf:3.18.0-0.12.6-full
 
-RUN apt update -y && apt install wkhtmltopdf -y
+RUN apk add --no-cache python3 py3-pip
 
 WORKDIR /app
 
