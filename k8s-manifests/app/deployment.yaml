@@ -17,7 +17,7 @@ spec:
       serviceAccountName: two-tier-app-sa
       containers:
         - name: two-tier-app
-          image: 140858350811.dkr.ecr.ap-south-1.amazonaws.com/exploreexpeditionsapp:a4600f0c3d9bc5972c2286e053dda10a7608bcd2
+          image: 140858350811.dkr.ecr.ap-south-1.amazonaws.com/exploreexpeditionsapp:e934bd340458b6d8d51b392bf7d2f028ddb6d34d
           envFrom:
             - configMapRef:
                 name: app-config
