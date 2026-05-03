@@ -1,11 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
-metadata: postgres-db
+metadata:
+  name: postgres-db
+  namespace: argocd
 spec:
   destination:
-    name: ''
-    namespace: myapp
-    server: 'YOUR K8S CLUSTER URL'
+    namespace: default
+    server: https://kubernetes.default.svc
   source:
     path: k8s-manifests/db
     repoURL: https://github.com/StoreMyProjects/flask-postgresql-app
