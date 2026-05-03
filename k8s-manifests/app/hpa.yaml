@@ -8,8 +8,8 @@ spec:
     kind: Deployment
     name: two-tier-app
 
-  minReplicas: 2
-  maxReplicas: 6
+  minReplicas: 1
+  maxReplicas: 3
 
   metrics:
     - type: Resource
