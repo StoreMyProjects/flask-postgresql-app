@@ -1,6 +1,4 @@
-FROM python:3.9-slim-buster
-
-RUN apt update -y && apt install wkhtmltopdf -y
+FROM python:3.12-alpine
 
 WORKDIR /app
 
