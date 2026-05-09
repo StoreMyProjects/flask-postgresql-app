@@ -1,9 +1,9 @@
-name: CI-CD Pipeline
+name: Dev build Pipeline
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches: [ "main" ]
+  push:
+    branches: [ "main" ]
 
 env:
   AWS_REGION: ap-south-1
@@ -18,6 +18,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    env:
+      IMAGE_TAG: v1.0.${{ github.run_number }}-dev
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -28,33 +31,55 @@ jobs:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/github-actions-oidc-role
           aws-region: ${{ secrets.AWS_REGION }}
 
-      - name: Login to ECR
-        run: |
-          aws ecr get-login-password --region $AWS_REGION | \
-          docker login --username AWS --password-stdin \
-          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build Docker image
         run: |
-          docker build -t $ECR_REPOSITORY:${{ github.sha }} . -f Dockerfile.app
+          docker build -t $ECR_REPOSITORY:${IMAGE_TAG} . -f Dockerfile.app
 
       - name: Tag image
         run: |
-          docker tag $ECR_REPOSITORY:${{ github.sha }} \
-          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:${{ github.sha }}
+          docker tag $ECR_REPOSITORY:${IMAGE_TAG} \
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/${ECR_REPOSITORY}:${IMAGE_TAG}
 
       - name: Push image to ECR
         run: |
           docker push \
-          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:${{ github.sha }}
+          ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/${ECR_REPOSITORY}:${IMAGE_TAG}
 
-      - name: Update kubeconfig
-        run: |
-          aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME
+      - name: Run Trivy Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:${{ env.IMAGE_TAG }}
+          format: table
+          exit-code: 1
+          severity: HIGH,CRITICAL
 
-      - name: Deploy to EKS
+      - name: Checkout GitOps Repository
+        uses: actions/checkout@v4
+        with:
+          repository: StoreMyProjects/exploreexpeditions-gitops
+          token: ${{ secrets.GH_PAT }}
+          path: gitops
+
+      - name: Update DEV Overlay
         run: |
-          kubectl apply -f k8s-manifests/db/ --validate=false
-          kubectl apply -f k8s-manifests/app/ --validate=false
-          
-          
+          cd gitops/overlays/dev/app
+          sed -i "s/newTag:.*/newTag: ${IMAGE_TAG}/" kustomization.yaml
+
+      - name: Commit and Push Changes
+        run: |
+          cd gitops
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add .
+          git commit -m "DEV Release ${IMAGE_TAG}" || echo "No changes"
+          git push
+
+      - name: Deployment Summary
+        run: |
+          echo "DEV deployment completed"
+          echo "Image: ${IMAGE_TAG}"
