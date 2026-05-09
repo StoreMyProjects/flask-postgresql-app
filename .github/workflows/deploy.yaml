@@ -60,7 +60,7 @@ jobs:
       - name: Checkout GitOps Repository
         uses: actions/checkout@v4
         with:
-          repository: StoreMyProjects/exploreexpeditions-gitops
+          repository: StoreMyProjects/flask-postgresql-app-gitops
           token: ${{ secrets.GH_PAT }}
           path: gitops
 
