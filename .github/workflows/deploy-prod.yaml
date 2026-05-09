@@ -1,0 +1,53 @@
+name: Prod build Pipeline
+
+on:
+  workflow_dispatch:
+  release:
+    types: [published]
+
+env:
+  AWS_REGION: ap-south-1
+  ECR_REPOSITORY: exploreexpeditionsapp
+  CLUSTER_NAME: devops-eks
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      IMAGE_TAG: ${{ github.event.release.tag_name }}
+
+    steps:
+      # ---------------------------------------------------
+      # Checkout GitOps Repository
+      # ---------------------------------------------------
+      - name: Checkout GitOps Repository
+        uses: actions/checkout@v4
+        with:
+          repository: StoreMyProjects/flask-postgresql-app-gitops
+          token: ${{ secrets.GH_PAT }}
+          path: gitops
+
+      - name: Update PROD Overlay
+        run: |
+          cd gitops/overlays/prod/app
+          sed -i "s/newTag:.*/newTag: ${IMAGE_TAG}/" kustomization.yaml
+
+      - name: Commit and Push Changes
+        run: |
+          cd gitops
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add .
+          git commit -m "PROD Release ${IMAGE_TAG}" || echo "No changes"
+          git push
+
+      - name: Production Summary
+        run: |
+          echo "Production promotion completed"
+          echo "Promoted Version: ${IMAGE_TAG}"
