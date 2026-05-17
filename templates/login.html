@@ -2,11 +2,14 @@
 
 {% block body %}
 
-<div style="height:100vh ; background: linear-gradient(150deg,#6147f1, #cc33cc);">
+<div style="
+height:100vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+url('{{ url_for('static', filename='home/tropical_beach.png') }}');
+background-size: cover; background-position: center; background-repeat: no-repeat; ">
   <div class="container-sm">
-      <div class="row justify-content-center">
-          <div class="col-sm-9 p-5">
-            <h1 style="text-align: center; color: brown;">Explore Expeditions</h1>
+      <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+          <div class="col-sm-6 p-5">
+            <h1 style="text-align: center; color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.6);">Explore Expeditions</h1>
             {% if msg %}
               <div><h4 style="text-align: center; color:green;">{{ msg }}</h4></div>
             {% endif %}
@@ -15,25 +18,25 @@
               <div><h4 style="text-align: center; color: red;">{{ error }}</h4></div>
             {% endif %}
 
-            <form class="card p-5" action="/login" method="post" style="background: linear-gradient(150deg,#9586eb, #ca8aca);"">
+            <form class="card p-5" action="/login" method="post" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: white; ">
               <h2 style="text-align: center; color: whitesmoke;">Sign In</h2>
               <div class="mb-3">
-                Username <input type="text" class="form-control" id="username" name="username" required>
+                Username <input style="background: rgba(255,255,255,0.85);" type="text" class="form-control" id="username" name="username" required>
               </div>
               <div class="mb-3">
-                Password <input type="password" class="form-control" id="userpassword" name="password" required>
+                Password <input style="background: rgba(255,255,255,0.85);" type="password" class="form-control" id="userpassword" name="password" required>
               </div>
               <div class="d-grid gap-2 d-md-block d-md-flex justify-content-md-center">
                 <input class="btn btn-primary" type="submit" value="Login">
               </div>
-            </form>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{{ url_for('register') }}">New around here? Sign up</a>
+          </form>
       </div>
   </div>
 </div>
 
-<footer class="bg-dark text-center text-white">
+<footer class="bg-dark text-center text-white" style="margin-top:0;">
 
   <div class="container p-4 pb-0">
 

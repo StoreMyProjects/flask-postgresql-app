@@ -2,38 +2,37 @@
 
 {% block body %}
 
-<div style="height:130vh ; background: linear-gradient(150deg,#6147f1, #cc33cc);">
-    <div class="container-sm h-100">
-        <div class="row justify-content-center">
+<div style="
+min-height:100vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+url('{{ url_for('static', filename='home/tropical_paradise.png') }}');
+background-size: cover; background-position: center; background-repeat: no-repeat; ">
+    <div class="container-sm h-80">
+        <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
             <div class="col-sm-9 p-5">
-                <h1 style="text-align: center; color: brown;">Explore Expeditions</h1>
-
-                <!-- {% if msg %}
-                <div><h4 style="text-align: center; color: green;">{{ msg }}</h4></div>
-                {% endif %} -->
+                <h1 style="text-align: center; color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.6);">Explore Expeditions</h1>
 
                 {% if error %}
                 <div><h4 style="text-align: center; color: red;">{{ error }}</h4></div>
                 {% endif %}
                 
-                <form class="card p-5" action="/register" method="post" style="background: linear-gradient(150deg,#9586eb, #ca8aca);">
+                <form class="card p-5" action="/register" method="post" style="background: rgba(255,255,255,0.15); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; color: white; ">
                     <h2 style="text-align: center; color: whitesmoke;">Create an account</h2>
                     <div class="mb-3">
-                        Full Name <input id="name" type="text" class="form-control" name="fullname" required>
+                        Full Name <input style="background: rgba(255,255,255,0.85);" id="name" type="text" class="form-control" name="fullname" required>
                     </div>
                     <div class="mb-3">
-                        Email <input id="email" type="email" class="form-control" name="email" required>
+                        Email <input style="background: rgba(255,255,255,0.85);" id="email" type="email" class="form-control" name="email" required>
                     </div>
                     <div class="mb-3">
-                        Username <input type="text" class="form-control" aria-describedby="usernameHelp" name="username" required>
-                        <div id="usernameHelp" class="form-text"> username must contain only letters and numbers, and letters must be lowercase.</div>
+                        Username <input style="background: rgba(255,255,255,0.85);" type="text" class="form-control" aria-describedby="usernameHelp" name="username" required>
+                        <div id="usernameHelp" class="form-text" style="color: wheat;"> lowercase letters and numbers only.</div>
                     </div>
                     <div class="mb-3">
-                        Password <input id="pass" type="password" class="form-control" aria-describedby="passwordHelpBlock" name="password" required>
-                        <div id="passwordHelpBlock" class="form-text"> password must be 6-12 characters long, contain atleast one uppercase & lowercase letters, numbers and special characters (@#$), and must not contain spaces or emoji.</div>
+                        Password <input style="background: rgba(255,255,255,0.85);" id="pass" type="password" class="form-control" aria-describedby="passwordHelpBlock" name="password" required>
+                        <div id="passwordHelpBlock" class="form-text" style="color: wheat;"> 6-12 chars, Aa1@#$.</div>
                     </div>
                     <div class="mb-3">
-                        Confirm Password <input id="pass" type="password" class="form-control" aria-describedby="passwordHelpBlock1" name="confirm" required>
+                        Confirm Password <input style="background: rgba(255,255,255,0.85);" id="confirmPass" type="password" class="form-control" aria-describedby="passwordHelpBlock1" name="confirm" required>
                     </div>
                     <div class="d-grid gap-2 d-md-block d-md-flex justify-content-md-center">
                         <input class="btn btn-primary" type="submit" value="Register">
@@ -46,7 +45,7 @@
     </div>
 </div>
 
-<footer class="bg-dark text-center text-white">
+<footer class="bg-dark text-center text-white" style="margin-top:0;">
 
     <div class="container p-4 pb-0">
 

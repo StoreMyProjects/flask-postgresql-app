@@ -2,26 +2,44 @@
 
 {% block body %}
 
-<h4 style="text-align: right;"><a href="/home">home page</a></h4>
-
-<div class="jumbotron text-center">
-	<h1 style="background-color: violet;">About Us</h1>
-	<h1 style="color: green; background-color: whitesmoke;">Welcome to Explore Expeditions! </h1>
-	<p class="lead">Explore Expeditions provides you the list and details of the most famous and beautiful destinations in the world for vacations in different seasons throughout the year.
-		Explore Expeditions allows you to book flights and hotels of your own choice anywhere in the world at the best price.
-	</p>
-	<br>
-	<p class="lead" style="color: blue;">Contact us: 1800-15481215 (toll-free)</p>
-	<br>
-	<h3 style="background-color: whitesmoke;">A family holiday in Nowhere</h3>
-	<br>
-	<p>Hotel Neptune offers a variety of standard guest rooms, panoramic sea view rooms, spacious family rooms and luxurious premium suites, which include a separate bedroom and bath. Balconies of these rooms offer breath-taking sea views. Along with premium accommodations, this Nowhere hotel also offers several dining options. In any one of our three restaurants, guests can enjoy culinary delights prepared by our master chefs. Guests may also relax and enjoy local and international beverages at our On the Rocks Cocktail Bar & Lounge.
-	</p>
+<div class="container mt-3">
+    <a href="/" class="btn btn-outline-dark">
+        ← Back to Home
+    </a>
 </div>
 
 <div class="jumbotron text-center">
-	<p class="lead" style="color: blue;">Developers Info: Amrendra Singh, Satish Karajwad</p>
+	<section style="height: 60vh;
+    background:
+    linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+    url('{{ url_for("static", filename="home/santorini_greece.png") }}'); background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;">
+    <div class="overlay">
+        <h1 style="font-size: 4rem;
+    font-weight: bold;">About Explore Expeditions</h1>
+        <p>Creating unforgettable travel experiences around the world</p>
+    </div>
+</section>
+<div class="container py-5">
+
+  <div class="card shadow-lg border-0 p-4">
+      <h2>Who We Are</h2>
+      <p>Explore Expeditions helps travelers discover breathtaking destinations...</p>
+  </div>
+
+</div class="container py-5">
+	<div class="contact-box text-center mt-5">
+		<h3>Contact Us</h3>
+		<p>📞 1800-00000000</p>
+		<p>✉ support@exploreexpeditions.com</p>
+	</div>
 </div>
+
 
 <footer class="bg-dark text-center text-white">
 
