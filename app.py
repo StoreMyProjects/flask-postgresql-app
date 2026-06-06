@@ -36,10 +36,10 @@ def register():
         password = request.form.get('password')
         confirm = request.form.get('confirm')
 
-        email_re = "^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
+        email_re = r"^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$"
         mat = re.search(email_re, email)
 
-        pass_re = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#&!])[A-Za-z\d@$#&!]{6,12}$"
+        pass_re = r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#&!])[A-Za-z\d@$#&!]{6,12}$"
         patt = re.compile(pass_re)
         matc = re.search(patt, password)
 
