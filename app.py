@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect, session, make_response, g
-from flask_session import Session
+# from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 import pdfkit
 import re, datetime
@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.register_blueprint(createsql)
 app.config.from_pyfile("config.py")
 
-Session(app)
+# Session(app)
 
 
 dt = datetime.datetime.now()
