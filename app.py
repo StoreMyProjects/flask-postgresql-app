@@ -112,6 +112,7 @@ def login():
     return render_template("login.html")
 
 @app.route("/check")
+@login_required
 def check():
     return str(session.get("user"))
 
