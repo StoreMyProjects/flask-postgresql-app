@@ -15,7 +15,7 @@ SESSION_REDIS = redis.Redis(
     host=REDIS_HOST,
     port=REDIS_PORT,
     password=REDIS_PASSWORD,
-    decode_responses=True,
+    ssl=True
 )
 
 SESSION_PERMANENT = False
