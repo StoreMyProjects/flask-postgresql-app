@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, url_for, redirect, session, make_response, g
 from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
-import pdfkit
+from weasyprint import HTML
 import re, datetime
 from createsql import createsql, get_db
 
@@ -420,10 +420,12 @@ def pdf():
     total_amount = (int(dest_pack) * no_of_guests) + (int(hotel_cost) * no_of_guests) + (int(flight_cost) * passengers)
     
     html = render_template("billing.html", package_name=package_name, booking_id=booking_id, booking_date=booking_date, booking_time=booking_time, total_amount=total_amount, flight_cost=flight_cost, hotel_cost=hotel_cost, dest_pack=dest_pack)
-    pdf = pdfkit.from_string(html, False)
+    pdf = HTML(string=html).write_pdf()
+
     response = make_response(pdf)
     response.headers["Content-Type"] = "application/pdf"
     response.headers["Content-Disposition"] = "inline; filename=bill.pdf"
+
     return response
 
 
