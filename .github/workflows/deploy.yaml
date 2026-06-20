@@ -56,6 +56,7 @@ jobs:
           format: table
           exit-code: 1
           severity: HIGH,CRITICAL
+          ignorefile: '.trivyignore'
 
       - name: Checkout GitOps Repository
         uses: actions/checkout@v4

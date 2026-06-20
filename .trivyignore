@@ -1,0 +1,7 @@
+# pdfkit 1.0.0
+# CVE-2025-26240
+# No upstream fix available as of Jun 2026.
+# Application generates PDFs from server-side templates only.
+# Risk accepted until patched release is available.
+
+CVE-2025-26240
