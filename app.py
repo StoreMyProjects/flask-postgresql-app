@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect, session, make_response, g
-# from flask_session import Session
+from flask_session import Session
 from werkzeug.security import generate_password_hash, check_password_hash
 import pdfkit
 import re, datetime
@@ -10,7 +10,13 @@ app = Flask(__name__)
 app.register_blueprint(createsql)
 app.config.from_pyfile("config.py")
 
-# Session(app)
+try:
+    app.config["SESSION_REDIS"].ping()
+    print("Redis connection successful")
+except Exception as e:
+    print(f"Redis connection failed: {e}")
+
+Session(app)
 
 
 dt = datetime.datetime.now()
@@ -104,6 +110,10 @@ def login():
             error = "Invalid credentials! Please enter valid username or password!"
             return render_template("login.html", error = error)
     return render_template("login.html")
+
+@app.route("/check")
+def check():
+    return str(session.get("user"))
 
 PACKAGE_DETAILS = {
     'Spain': {'place': 'Barcelona', 'num_of_days': 10, 'estimated_cost': 220000},
