@@ -33,6 +33,12 @@ def home():
     return render_template("home.html")
 
 
+@app.route('/healthy')
+def healthy():
+    render_template("login.html")
+    return 'OK', 200
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == "POST":
