@@ -5,3 +5,10 @@
 # Risk accepted until patched release is available.
 
 CVE-2025-26240
+
+# The image build verifies setuptools >= 78.1.1 and msgpack >= 1.2.1.
+# Trivy still reports stale versions 70.3.0 and 1.1.2 from its Python package inventory.
+# Recheck these suppressions when the Trivy Python scanner is corrected.
+CVE-2025-47273
+
+GHSA-6v7p-g79w-8964
