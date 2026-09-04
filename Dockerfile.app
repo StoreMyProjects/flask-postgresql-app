@@ -4,6 +4,16 @@ WORKDIR /app
 
 COPY requirements.txt .
 
+RUN rm -rf /usr/lib/python3.12/site-packages/setuptools \
+	/usr/lib/python3.12/site-packages/setuptools-*.dist-info \
+	/usr/lib/python3.12/site-packages/msgpack \
+	/usr/lib/python3.12/site-packages/msgpack-*.dist-info \
+	/usr/lib/python3.12/site-packages/wheel-*.dist-info \
+	/usr/local/lib/python3.12/site-packages/setuptools \
+	/usr/local/lib/python3.12/site-packages/setuptools-*.dist-info \
+	/usr/local/lib/python3.12/site-packages/msgpack \
+	/usr/local/lib/python3.12/site-packages/msgpack-*.dist-info \
+	/usr/local/lib/python3.12/site-packages/wheel-*.dist-info
 RUN pip install --no-cache-dir --upgrade pip setuptools wheel msgpack
 RUN pip install --no-cache-dir -r requirements.txt
 RUN pip install --no-cache-dir --upgrade "setuptools>=78.1.1" "msgpack>=1.2.1" \
