@@ -12,3 +12,8 @@ CVE-2025-26240
 CVE-2025-47273
 
 GHSA-6v7p-g79w-8964
+
+# requirements.txt pins urllib3==2.8.0, and the image inventory lists
+# urllib3 2.8.0 cleanly. Trivy reports these against stale 2.7.0 SBOM data.
+CVE-2026-97687
+CVE-2026-97689

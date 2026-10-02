@@ -41,7 +41,7 @@ jobs:
 
       - name: Verify Python package versions
         run: |
-          docker run --rm $ECR_REPOSITORY:${IMAGE_TAG} python -c "from importlib.metadata import version; print('setuptools', version('setuptools')); print('msgpack', version('msgpack')); assert tuple(map(int, version('setuptools').split('.')[:2])) >= (78, 1); assert tuple(map(int, version('msgpack').split('.')[:2])) >= (1, 2)"
+          docker run --rm $ECR_REPOSITORY:${IMAGE_TAG} python -c "from importlib.metadata import version; print('setuptools', version('setuptools')); print('msgpack', version('msgpack')); print('urllib3', version('urllib3')); assert tuple(map(int, version('setuptools').split('.')[:2])) >= (78, 1); assert tuple(map(int, version('msgpack').split('.')[:2])) >= (1, 2); assert version('urllib3') == '2.8.0'"
 
       - name: Tag image
         run: |
