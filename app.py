@@ -13,15 +13,11 @@ app = Flask(__name__)
 app.register_blueprint(createsql)
 app.config.from_pyfile("config.py")
 
-# try:
-#     redis_client = app.config.get("SESSION_REDIS")
-#     if redis_client:
-#         redis_client.ping()
-#         print("Redis connection successful")
-#     else:
-#         print("Redis connection skipped: SESSION_REDIS not configured")
-# except Exception as exc:
-#     print(f"Redis connection failed: {exc}")
+try:
+    app.config["SESSION_REDIS"].ping()
+    print("Redis connection successful")
+except Exception as e:
+    print(f"Redis connection failed: {e}")
 
 Session(app)
 
