@@ -44,10 +44,6 @@
       <div class="col-sm-9 p-5">
           <form class="row g-3" action="/flights" method="post">
 
-            {% if msg %}
-            <div><h4 style="text-align: center; color: white;">{{ msg }}</h4></div>
-            {% endif %}
-
             <div class="col-md-12">
               <label for="cost" class="form-label">Choose Your Starting Budget Range:</label>
               <select name="cost" class="form-select" id="cost" name="cost">

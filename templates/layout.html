@@ -16,6 +16,23 @@
     
     {% endblock %}
 
+    {% if msg %}
+    <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+      <div id="app-message-toast" class="toast text-bg-dark border-0 shadow" role="status" aria-live="polite" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body">{{ msg }}</div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const toastElement = document.getElementById('app-message-toast');
+        bootstrap.Toast.getOrCreateInstance(toastElement, { delay: 4000 }).show();
+      });
+    </script>
+    {% endif %}
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
